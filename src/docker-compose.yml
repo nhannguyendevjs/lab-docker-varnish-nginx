@@ -1,0 +1,26 @@
+services:
+  nginx:
+    image: nginx:latest
+    container_name: nginx
+    volumes:
+      - ./nginx/html:/usr/share/nginx/html
+      - ./nginx/conf/nginx.conf:/etc/nginx/nginx.conf
+      - ./nginx/conf.d:/etc/nginx/conf.d
+      - ./nginx/conf/mime.types:/etc/nginx/mime.types
+    ports:
+      - "8080:80"
+  varnish:
+    image: varnish:latest
+    container_name: varnish
+    user: root
+    volumes:
+      - ./varnish/default.vcl:/etc/varnish/default.vcl
+    ports:
+      - "80:80"
+    tmpfs:
+      - /var/lib/varnish:exec
+    environment:
+      - VARNISH_SIZE=2G  
+    command: "-p default_keep=300"
+    depends_on:
+      - "nginx"
