@@ -40,38 +40,6 @@ Released under the [MIT License](LICENSE).
 
 You can download and install Docker on https://docs.docker.com/desktop/install/windows-install/
 
-### Network
-
-```bash
-docker network create node-postgres-network
-```
-
-### Ubuntu
-
-```bash
-docker run --name node-postgres-ubuntu --network node-postgres-network -p 80:8080 -p 443:8443 -p 22:22 -itd ubuntu:latest
-```
-
-### PostgreSQL
-
-```bash
-docker run --name node-postgres --network node-postgres-network -p 5432:5432 -e POSTGRES_DB=node -e POSTGRES_USER=admin -e POSTGRES_PASSWORD=admin -d postgres:latest
-
-docker exec -it node-postgres
-```
-
-#### URI
-
-```txt
-postgres://admin:admin@localhost:5432/node?schema=public
-```
-
-### Redis
-
-```bash
-docker run -d --network node-postgres-network --name node-postgres-redis -p 6379:6379 redis:latest
-```
-
 ## Coding Naming Conventions
 
 ➖ PascalCase 👉 Classes and Methods
@@ -171,10 +139,6 @@ Examples
 merge/dev_lombok-refactoring
 
 merge/combined-device-support
-
-## PostgreSQL Naming Conventions
-
-Use clear, descriptive names. Use camelCase for multi-word names. Avoid using PostgreSQL reserved words.
 
 ## Visual Studio Extensions
 
